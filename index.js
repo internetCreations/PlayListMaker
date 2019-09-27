@@ -1,0 +1,4 @@
+
+function myFucntion(){ 
+    alert('test'); 
+}
