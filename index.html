@@ -1,45 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     
+    <!--bootstrap-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="./index.js"></script>
+    
     <head>
+            <!--bootstrap-->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+            
+
       <title>Spotify Web Playback SDK Quick Start Tutorial</title>
     </head>
     <body>
-      <h1>Spotify Web Playback SDK Quick Start Tutorial</h1>
-      <h2>Open your console log: <code>View > Developer > JavaScript Console</code></h2>
-    
-      <script src="https://sdk.scdn.co/spotify-player.js"></script>
-      <script>
-        window.onSpotifyWebPlaybackSDKReady = () => {
-          const token = 'BQCzpnpOgy1vr4S7TJXRp-ZNsoZFqK5KcBAGR2MfRyZghokpqU998tYXMtjglEa4E7SWJxrikGvXbgA8z8MPWMcwh1ASvu5IkfhCliEj8Hn4K6sJbY6nElkorEQpI1DVn2tbD9yQ8fchHbEcOnkqBbhZs5BAvjh7sW-E2GU';
-          const player = new Spotify.Player({
-            name: 'Web Playback SDK Quick Start Player',
-            getOAuthToken: cb => { cb(token); }
-          });
-    
-          // Error handling
-          player.addListener('initialization_error', ({ message }) => { console.error(message); });
-          player.addListener('authentication_error', ({ message }) => { console.error(message); });
-          player.addListener('account_error', ({ message }) => { console.error(message); });
-          player.addListener('playback_error', ({ message }) => { console.error(message); });
-    
-          // Playback status updates
-          player.addListener('player_state_changed', state => { console.log(state); });
-    
-          // Ready
-          player.addListener('ready', ({ device_id }) => {
-            console.log('Ready with Device ID', device_id);
-          });
-    
-          // Not Ready
-          player.addListener('not_ready', ({ device_id }) => {
-            console.log('Device ID has gone offline', device_id);
-          });
-    
-          // Connect to the player!
-          player.connect();
-        };
-      </script>
-    </body>
+        <button onclick="getState();">Get State</button>
+        <button onclick="pause();">Pause</button>
+        <button onclick="resume();">Resume</button>
+        <p id='state'>Nothing Playing</p>
+
+        <button onclick="getPlaylists();">Get your playlists</button>
+<!--
+     <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  
+-->
+
+<table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+<!--bootstrap-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+         </body>
     </html>
