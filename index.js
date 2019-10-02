@@ -3,7 +3,7 @@ let token = '';
 let player = {};
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    token = 'BQAfWtImrHTch1DG_4ES-lMYwkk6eFXwJT9r2IC1req_qZEDiTuNAEFbN-w3r1M2lpDOVhm-yuXzsROGoYUjNMTHhdZy1qGdpFVXsGJop3o0DITjnX7n0ps88kvHkYNs21V5UU-mXEpMRTraoVu18yJ3d7qKTo6CpxIbMyw';
+    token = 'BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
     player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
       getOAuthToken: cb => { cb(token); }
@@ -81,7 +81,7 @@ var dataSet = [];
 
 function getPlaylists() {
     let theUrl = 'https://api.spotify.com/v1/me/playlists';
-    let auth = 'Bearer BQAfWtImrHTch1DG_4ES-lMYwkk6eFXwJT9r2IC1req_qZEDiTuNAEFbN-w3r1M2lpDOVhm-yuXzsROGoYUjNMTHhdZy1qGdpFVXsGJop3o0DITjnX7n0ps88kvHkYNs21V5UU-mXEpMRTraoVu18yJ3d7qKTo6CpxIbMyw';
+    let auth = 'Bearer BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
     
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); 
@@ -97,28 +97,34 @@ function getPlaylists() {
     }
 }
 
-getPlaylists(); 
+//getPlaylists(); 
 
-$(document).ready(function() {
-  $.noConflict();
-  
-
-  $('#example').DataTable( {
-      data: dataSet,
-      columns: [
-          { data: 'name' },
-          { data: "id" }
-      ], 
-      select: {
-        style:    'os',
-        selector: 'td:first-child'
+let theUrl = 'https://api.spotify.com/v1/me/playlists';
+let auth = 'Bearer BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
+   
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $scope.playLists = [];
+  $http({
+    method : "GET",
+      url : theUrl, 
+      headers: {
+        'Authorization': auth
+      } 
+  }).then(function mySuccess(response) {
+    $scope.parsedResponse = angular.fromJson(response.data); 
+    console.log($scope.parsedResponse);
+    for(var x of $scope.parsedResponse.items){
+      let newPlaylist = new Playlist(x.name, x.id); 
+      //playLists.push(newPlaylist); 
+      alert(playLists);
     }
-  } );
-  $('#example tbody').on( 'click', 'tr', function () {
-    $(this).toggleClass('selected');
-    console.log( JSON.stringify($('#example').DataTable().rows('.selected'))  );
-  } );
-} ); 
+
+  }, function myError(response) {
+    $scope.myWelcome = response.statusText;
+  });
+  alert(JSON.stringify(playLists)); 
+});
 
 
 
