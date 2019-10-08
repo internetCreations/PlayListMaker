@@ -3,7 +3,7 @@ let token = '';
 let player = {};
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    token = 'BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
+    token = 'BQBspal-L7TW29QMTNTKxzHr8ctKp_SEf0dSQFDRboIpSjmfgjoz-QEOPf87sSNz9QNjQghzzi0Z9Wz1lhaDifEN8is-viL11oJJEiFfSi6NuP_6jo6HU2tXLVrB5KKMUSLtcEq0ojiYCDaj6uVAOq3oKPJnFcPAugD3h48';
     player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
       getOAuthToken: cb => { cb(token); }
@@ -69,9 +69,18 @@ function resume(){
 
 
 class Playlist {
-  constructor(name, id) {
-    this.name = name;
+  constructor(id, name, ownerName, length) {
     this.id = id;
+    this.name = name;
+    this.ownerName = ownerName;
+    this.length = length;
+  }
+}
+
+class Track {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
   }
 }
 
@@ -81,7 +90,7 @@ var dataSet = [];
 
 function getPlaylists() {
     let theUrl = 'https://api.spotify.com/v1/me/playlists';
-    let auth = 'Bearer BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
+    let auth = 'Bearer BQBspal-L7TW29QMTNTKxzHr8ctKp_SEf0dSQFDRboIpSjmfgjoz-QEOPf87sSNz9QNjQghzzi0Z9Wz1lhaDifEN8is-viL11oJJEiFfSi6NuP_6jo6HU2tXLVrB5KKMUSLtcEq0ojiYCDaj6uVAOq3oKPJnFcPAugD3h48';
     
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", theUrl, false ); 
@@ -100,11 +109,9 @@ function getPlaylists() {
 //getPlaylists(); 
 
 let theUrl = 'https://api.spotify.com/v1/me/playlists';
-let auth = 'Bearer BQBmH4yXM6Otxyd66qZf-DBXI6Imkc7ijeKQA8OAG_nrUpTBfJnQTHZWM4FGww22__-s2HfcaKCt76uLNAdTjLxnrbVM1eovrzwyuRRSwleZ2NZFCK_oe1Fv-4pqtqrwUPbvTXp1afw9zgJlX5eAiSbeAquJAWDZK6PkQW0';
-   
+let auth = 'Bearer BQBspal-L7TW29QMTNTKxzHr8ctKp_SEf0dSQFDRboIpSjmfgjoz-QEOPf87sSNz9QNjQghzzi0Z9Wz1lhaDifEN8is-viL11oJJEiFfSi6NuP_6jo6HU2tXLVrB5KKMUSLtcEq0ojiYCDaj6uVAOq3oKPJnFcPAugD3h48';
 var app = angular.module('myApp', []);
-app.controller('customersCtrl', function($scope, $http) {
-  $scope.playLists = [];
+app.controller('customersCtrl', function($scope, $http) { 
   $http({
     method : "GET",
       url : theUrl, 
@@ -114,16 +121,46 @@ app.controller('customersCtrl', function($scope, $http) {
   }).then(function mySuccess(response) {
     $scope.parsedResponse = angular.fromJson(response.data); 
     console.log($scope.parsedResponse);
+    $scope.playLists = [];
     for(var x of $scope.parsedResponse.items){
-      let newPlaylist = new Playlist(x.name, x.id); 
-      //playLists.push(newPlaylist); 
-      alert(playLists);
+      let newPlaylist = new Playlist(x.id, x.name, x.owner.display_name, x.tracks.total); 
+      $scope.playLists.push(newPlaylist); 
+      console.log($scope.playLists); 
     }
-
   }, function myError(response) {
     $scope.myWelcome = response.statusText;
   });
-  alert(JSON.stringify(playLists)); 
+
+  $scope.selectedPlayLists = [];
+  $scope.newMixedPlaylist = [];
+  $scope.SelectPlaylist = function(x){
+    
+    //add playlist to list of selected PL
+    $scope.selectedPlayLists.push(x); 
+
+    playlistURL= 'https://api.spotify.com/v1/playlists/' + x.id +'/tracks';
+    //get tracks for the selected playlist
+    $http({
+      method : "GET",
+        url : playlistURL, 
+        headers: {
+          'Authorization': auth
+        } 
+    }).then(function mySuccess(response) {
+      $scope.selectedPlaylistParsedResponse = angular.fromJson(response.data);
+      console.log($scope.selectedPlaylistParsedResponse.items); 
+      alert(typeof $scope.selectedPlaylistParsedResponse.items ); 
+      for(var y of  $scope.selectedPlaylistParsedResponse.items){
+        let newTrack = new Track(y.track.id, y.track.name); 
+        $scope.newMixedPlaylist.push(newTrack);
+      }
+      //alert(newMixedPlaylist); 
+    }, function myError(response) {
+      $scope.myWelcome = response.statusText;
+    });
+
+  }
+ 
 });
 
 
