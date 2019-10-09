@@ -12,26 +12,23 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script>
   
   <!--Local Resources-->
-  <script src="./index.js"></script>
-  <script src="./object_structure.js"></script>
-  
+  <script src="./Object_Model.js"></script>
+  <script src="./Helper.js"></script>
+  <script src="./Controller.js"></script>
+
   <head>
     <!--Bootstrap-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Spotify Web Playback SDK Quick Start Tutorial</title>
+    <title>Spotify Playlist Mixer</title>
   </head>
   <body>
-    <button onclick="getState();">Get State</button>
-    <button onclick="pause();">Pause</button>
-    <button onclick="resume();">Resume</button>
-    <p id='state'>Nothing Playing</p>
     <!-- main page body-->
-    <div ng-app="myApp" ng-controller="customersCtrl">
+    <div ng-app="myApp" ng-controller="appController">
       <div class="row">
         <div class="col-6 col-md-4">
-          <h1>Your Playlists</h1>>
+          <h1>Your Playlists</h1>
           <table class="table table-hover table-dark">
             <thead>
               <tr>
@@ -43,13 +40,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="x in playLists">
+              <tr ng-repeat="playlist in usersCurrentPlayLists">
                 <td>
-                  <input type="checkbox" ng-click="SelectPlaylist( x )"></input>
+                  <input type="checkbox" ng-click="userSelectsPlaylist( playlist )"></input>
                 </td>
-                <td>{{ x.name }}</td>
-                <td>{{ x.ownerName }}</td>
-                <td>{{ x.length }}</td>
+                <td>{{ playlist.name }}</td>
+                <td>{{ playlist.ownerName }}</td>
+                <td>{{ playlist.length }}</td>
               </tr>
             </tbody>
           </table>
