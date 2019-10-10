@@ -1,93 +1,64 @@
+<!--<!DOCTYPE html>
+<html>
+ Angular 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+
+<body ng-app="myApp">
+
+
+    <a href="#test">Playlist Mixer</a>
+    
+    
+    <ng-view></ng-view>
+        
+    
+    <script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function($routeProvider) {
+      $routeProvider
+      .when("/test", {
+        templateUrl : "PlaylistMixer/PlaylistMixer.html"
+      })
+    });
+    </script>
+    </body>
+</html>
+
+-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-  <!-- Angular-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  
-  <!--Bootstrap-->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
-  <!--Spotify-->
-  <script src="https://sdk.scdn.co/spotify-player.js"></script>
-  
-  <!--Local Resources-->
-  <script src="./Object_Model.js"></script>
-  <script src="./Helper.js"></script>
-  <script src="./Controller.js"></script>
+<body ng-app="myApp">
 
-  <head>
-    <!--Bootstrap-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<p><a href="#">Main</a></p>
 
-    <title>Spotify Playlist Mixer</title>
-  </head>
-  <body>
-    <!-- main page body-->
-    <div ng-app="myApp" ng-controller="appController">
-      <div class="row">
-        <div class="col-6 col-md-4">
-          <h1>Your Playlists</h1>
-          <table class="table table-hover table-dark">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Playlist Name</th>
-                <th scope="col">Owner</th>
-                <th scope="col"># of Tracks</th>
-                <th scope="col">Icon</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="playlist in usersCurrentPlayLists">
-                <td>
-                  <input type="checkbox" ng-click="userSelectsPlaylist( playlist )"></input>
-                </td>
-                <td>{{ playlist.name }}</td>
-                <td>{{ playlist.ownerName }}</td>
-                <td>{{ playlist.length }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-6 col-md-4">
-          <h1>Playlists Currently Mixing</h1>
-          <table class="table table-hover table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Playlist Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="y in selectedPlayLists">
-                <td>{{ y.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-6 col-md-4">
-          <h1>New Mixed playlist</h1>
-          <table class="table table-hover table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Track Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="z in newMixedPlaylist">
-                <td>{{ z.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<a href="#london">City 1</a>
+<a href="#paris">City 2</a>
 
-    <!--bootstrap-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
-  </body>
+<p>Click on the links to read about London and Paris.</p>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "PlaylistMixer/PlaylistMixer.html"
+    })
+    .when("/london", {
+      
+        templateUrl : "PlaylistMixer/PlaylistMixer.html"
+    })
+    .when("/paris", {
+        templateUrl : "PlaylistMixer/PlaylistMixer.html"
+    });
+});
+</script>
+
+</body>
 </html>
