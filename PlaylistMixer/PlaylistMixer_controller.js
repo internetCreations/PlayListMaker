@@ -1,5 +1,3 @@
-import { RouterModule, Routes } from '@angular/router';
-
 
 window.onSpotifyWebPlaybackSDKReady = () => {
     initWebPlayer(); 
@@ -23,10 +21,17 @@ app.controller('appController', function($scope, $http) {
 
   }
 
-  
-  $scope.playASong = function(){
-  
+  // when ..........   play the playlist
+  $scope.playASong = function() {
     playASong($scope, $http); 
+  }
+
+  $scope.playNextTrack = function() {
+    playNextTrack($scope, $http); 
+  }
+
+  $scope.shuffle = function() { 
+    $scope.newMixedPlaylist = shuffle($scope.newMixedPlaylist); 
   }
 
 });

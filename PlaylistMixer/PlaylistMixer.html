@@ -12,14 +12,11 @@
   <script src="https://sdk.scdn.co/spotify-player.js"></script>
   
   <!--Local Resources-->
-  <script src="./Object_Model.js"></script>
-  <script src="./Helper.js"></script>
-  <script src="./Controller.js"></script>
+  <script src="./PlaylistMixer_ViewModel.js"></script>
+  <script src="./PlaylistMixer_helper.js"></script>
+  <script src="./PlaylistMixer_controller.js"></script>
 
   <head>
-    <!--Angular -->
-    <base href="/">
-    
     <!--Bootstrap-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,7 +28,9 @@
     <div ng-app="myApp" ng-controller="appController">
       <div class="row">
         <h1>Currently Playing</h1>
+        <button ng-click="shuffle()">Shuffle</button>
         <button ng-click="playASong()">Play</button>
+        <button ng-click="playNextTrack()">Play Next Track</button>
       </div>
       <div class="row">
         <div class="col-6 col-md-4">

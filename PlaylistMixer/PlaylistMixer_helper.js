@@ -1,6 +1,7 @@
-var token = 'BQCH0-lMyZzM8zofTCjQrTkBN6LOHbazBuzZ5x0R0H-kJ5LIRFJMKRczhcrslLa37Q_nZKzWa35OzC2dgtd5_cra_JjJv0LHT8797wqnPWO9TVZcsLXYZjps7eUJc-lq6T309es52EuOJTjzDknG-G0l2rH-NpIzU6oElNM';
+var token = 'BQBU2ZBOI1-Lgf0CnUoqmqNMhwSGop7QZmiuuHP7lRn6vQEch_io4Rvs_WyyW4f2-6jRjm4w25Xuke4m6i9ponHL_WKXAxGtd2pOZlaXZ8zuxX8x_XIU7DNqGpTiXVbo9BhOUBC83H8zLNlmTeNykmWQsW2JI_FnQw6gnhw';
 var player = {};
-var dataSet = []; 
+//var dataSet = []; 
+
 
 function initWebPlayer() {
    
@@ -66,40 +67,76 @@ function getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http) {
     }).then(function mySuccess(response) {
         $scope.selectedPlaylistParsedResponse = angular.fromJson(response.data); 
       
-        for(var y of  $scope.selectedPlaylistParsedResponse.items){
+        for(var y of $scope.selectedPlaylistParsedResponse.items){
             let newTrack = new Track(y.track.id, y.track.name); 
             $scope.newMixedPlaylist.push(newTrack);
-        }
+        }  
     }, function myError(response) {
         $scope.myWelcome = response.statusText;
     });
 
 }
 
-function playASong() {
-    const play = ({
-        spotify_uri,
-        playerInstance: {
-            _options: {
-            getOAuthToken,
-            id
-            }
+function playASong($scope, $http) {
+    
+    var putPlaySongURL = 'https://api.spotify.com/v1/me/player/play';
+    var currentlyMixedURIs = $scope.newMixedPlaylist.map(a => a.id); 
+    var formatedCurrentlyMixedURIs = [];
+
+    for(var s of currentlyMixedURIs){
+        formatedCurrentlyMixedURIs.push("spotify:track:".concat(s));
+    }
+
+    $http({
+        method : "PUT",
+        url : putPlaySongURL, 
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        data : {
+           "uris": formatedCurrentlyMixedURIs
         }
-        }) => {
-        getOAuthToken(access_token => {
-            fetch(`https://api.spotify.com/v1/me/player/play`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [spotify_uri] }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${access_token}`
-            },
-            });
-        });
-        };
+    }).then(function mySuccess(response) {
         
-        play({
-        playerInstance: new Spotify.Player({ name: "..." }),
-        spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
-        });
+    }, function myError(response) {
+        $scope.myWelcome = response.statusText;
+    }); 
 }
+
+function playNextTrack($scope, $http) {
+    
+    var playNextTrackURL = 'https://api.spotify.com/v1/me/player/next';
+
+    $http({
+        method : "POST",
+        url : playNextTrackURL, 
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(function mySuccess(response) {
+        
+    }, function myError(response) {
+        $scope.myWelcome = response.statusText;
+    }); 
+}
+
+
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
