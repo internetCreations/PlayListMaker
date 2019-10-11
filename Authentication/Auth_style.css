@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #393f4d;
+}
+
+.auth-container {
+    background-color: #393f4d;
+    margin-top: 10%; 
+}
+
+.auth-actions {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+button {
+    margin-top: 1em;
+    background-color: #1db954;
+    border: none;
+    border-radius: 16px;
+    
+    padding-top: .7em; 
+    padding-bottom: .7em; 
+    padding-left: 3em; 
+    padding-right: 3em; 
+    
+    font-weight: bold;
+    font-size: 1.5em;
+    
+}
+
+h1 {
+    color: #d4d4dc; 
+}
+
+

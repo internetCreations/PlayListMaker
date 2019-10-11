@@ -1,4 +1,4 @@
-var token = 'BQBU2ZBOI1-Lgf0CnUoqmqNMhwSGop7QZmiuuHP7lRn6vQEch_io4Rvs_WyyW4f2-6jRjm4w25Xuke4m6i9ponHL_WKXAxGtd2pOZlaXZ8zuxX8x_XIU7DNqGpTiXVbo9BhOUBC83H8zLNlmTeNykmWQsW2JI_FnQw6gnhw';
+var token = 'BQB52FxlvWi1jpTNztse-tt93_kDHb9QNzNHfGNYJ7NE0OpMDbNxkTd9nWmiHq3YS6VOpDvJBUca0ToJv0UtHRnAWa7LwuwjHhLg5TRNLSyqLJfXApjFc1GdnIdf3BxLiHN-EQboOrC4CIYgTL0';
 var player = {};
 //var dataSet = []; 
 
