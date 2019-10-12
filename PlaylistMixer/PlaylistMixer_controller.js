@@ -1,4 +1,4 @@
-var token = [];
+var token = '';
 
 window.onSpotifyWebPlaybackSDKReady = () => {
     initWebPlayer(); 
