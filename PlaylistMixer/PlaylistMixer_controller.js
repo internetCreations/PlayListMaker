@@ -10,7 +10,7 @@ app.controller('appController', function($scope, $http) {
   $scope.newMixedPlaylist = [];
 
   //get current users token
-  alert(window.location.search);
+  token = window.location.hash.split('=')[1]; 
 
   //on load, get current users playlists
   getCurrentUsersPlaylists($scope, $http); 
