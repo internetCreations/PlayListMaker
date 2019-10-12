@@ -9,6 +9,9 @@ app.controller('appController', function($scope, $http) {
   $scope.selectedPlayLists = [];
   $scope.newMixedPlaylist = [];
 
+  //get current users token
+  alert(window.location.search);
+
   //on load, get current users playlists
   getCurrentUsersPlaylists($scope, $http); 
 
