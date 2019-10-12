@@ -13,8 +13,9 @@ app.controller('appController', function($scope, $http) {
   //get current users token
   token = window.location.hash.split('=')[1]; 
 
-  //on load, get current users playlists
   getCurrentUsersPlaylists($scope, $http); 
+
+  getCurrentDeviceID($scope, $http); 
 
   //when a saved playlist is selected, add to Selected Playlist List, and get tracks
   $scope.userSelectsPlaylist = function(userSelectedPlaylist){
@@ -22,7 +23,6 @@ app.controller('appController', function($scope, $http) {
     $scope.selectedPlayLists.push(userSelectedPlaylist);
     
     getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http); 
-
   }
 
   // when ..........   play the playlist

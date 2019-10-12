@@ -1,7 +1,4 @@
-//'var token = []; BQB52FxlvWi1jpTNztse-tt93_kDHb9QNzNHfGNYJ7NE0OpMDbNxkTd9nWmiHq3YS6VOpDvJBUca0ToJv0UtHRnAWa7LwuwjHhLg5TRNLSyqLJfXApjFc1GdnIdf3BxLiHN-EQboOrC4CIYgTL0';
 var player = {};
-//var dataSet = []; 
-
 
 function initWebPlayer() {
    
@@ -74,7 +71,6 @@ function getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http) {
     }, function myError(response) {
         $scope.myWelcome = response.statusText;
     });
-
 }
 
 function playASong($scope, $http) {
@@ -120,8 +116,6 @@ function playNextTrack($scope, $http) {
     }); 
 }
 
-
-
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
@@ -137,6 +131,23 @@ function shuffle(array) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-  
     return array;
-  }
+}
+
+function getCurrentDeviceID($scope, $http) {
+    var getCurrentDeviceIdURL = 'https://api.spotify.com/v1/me/player/devices';
+    //alert('test'); 
+    $http({
+        method : "GET",
+        url : getCurrentDeviceIdURL, 
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(function mySuccess(response) {
+        alert(angular.fromJson(response.data)); 
+        //$scope.selectedPlaylistParsedResponse = angular.fromJson(response.data);
+    }, function myError(response) {
+        alert(JSON.stringify(response)); 
+        $scope.myWelcome = response.statusText;
+    }); 
+}
