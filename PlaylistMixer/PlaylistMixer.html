@@ -15,8 +15,13 @@
   <script src="./PlaylistMixer_ViewModel.js"></script>
   <script src="./PlaylistMixer_helper.js"></script>
   <script src="./PlaylistMixer_controller.js"></script>
+  <style src="./PlaylistMixer_styleSheet.css"></style>
+  <script src="../WebServices.js"></script>
 
   <head>
+
+    <!--local--> 
+    <link rel="stylesheet" href="PlaylistMixer_styleSheet.css">
     <!--Bootstrap-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,19 +29,28 @@
     <title>Spotify Playlist Mixer</title>
   </head>
   <body>
+   
+    <div ng-app="myApp" ng-controller="appController" class='main-container'>
     <!-- main page body-->
-    <div ng-app="myApp" ng-controller="appController">
       <div class="row">
         <h1>Currently Playing</h1>
-        <button ng-click="shuffle()">Shuffle</button>
-        <button ng-click="playASong()">Play</button>
-        <button ng-click="pause()">Pause</button>
-        <button ng-click="playNextTrack()">Play Next Track</button>
-        <button ng-click="getDeviceInfo()">getDeviceInfo</button>  
+        <div class="playback-container">
+          <button ng-click="shuffle()"  class="shuffle">Shuffle</button>
+          <button ng-click="playPreviousTrack()" class="previous round next-prev">&#8249;</button>  
+          <img src="PauseIcon.png" ng-click="togglePlayPause()" id='pause' class='pause'>
+          <img src="PlayIcon.png" ng-click="togglePlayPause()" id='play' class='play'>
+          <button ng-click="playNextTrack()" class="next round next-prev">&#8250;</button>
+          <!--<button ng-click="getDeviceInfo()">getDeviceInfo</button>  --> 
+        </div>
       </div>
       <div class="row">
-        <div class="col-6 col-md-4">
-          <h1>Your Saved Playlists</h1>
+        <div class="col-md-4">
+          <div class="accordion card">
+          <div class="card-header">
+            <button class="btn" type="button" data-toggle="collapse" data-target="#column1">
+              <h1>Your Saved Playlists</h1>
+            </button>
+          <div class="card-body collapse show" id="column1">
           <table class="table table-hover table-dark">
             <thead>
               <tr>
@@ -57,9 +71,17 @@
               </tr>
             </tbody>
           </table>
+          </div>
+          </div>
+          </div>
         </div>
-        <div class="col-6 col-md-4">
-          <h1>Playlists to Mix</h1>
+        <div class="col-md-4">
+          <div class="accordion card">
+          <div class="card-header">
+            <button class="btn" type="button" data-toggle="collapse" data-target="#column2">
+              <h1>Playlists to Mix</h1>
+            </button>
+          <div class="card-body collapse show" id="column2">
           <table class="table table-hover table-dark">
             <thead>
               <tr>
@@ -72,9 +94,18 @@
               </tr>
             </tbody>
           </table>
+          </div>
+          </div>
+          </div>
         </div>
-        <div class="col-6 col-md-4">
-          <h1>New Mixed Playlist</h1>
+        <div class="col-md-4">
+          <div class="accordion card">
+          <div class="card-header">
+            <button class="btn" type="button" data-toggle="collapse" data-target="#column3">
+                <h1>New Mixed Playlist</h1>
+            </button>
+          </div>
+          <div class="card-body collapse show" id="column3">
           <table class="table table-hover table-dark">
             <thead>
               <tr>
@@ -87,9 +118,12 @@
               </tr>
             </tbody>
           </table>
+          </div>
+          </div>
         </div>
       </div>
     </div>
+
 
     <!--bootstrap-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

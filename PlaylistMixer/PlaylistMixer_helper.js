@@ -77,7 +77,6 @@ function getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http) {
 
 function playASong($scope, $http) {
 
-    //alert('play1'+ player); 
     var putPlaySongURL = 'https://api.spotify.com/v1/me/player/play?device_id=2a6784273dc209214fbff72bf1787483583e38f8'; //efbca28c4003d99ad640a9c283c7c7f5b3d965ac';
     var currentlyMixedURIs = $scope.newMixedPlaylist.map(a => a.id); 
     var formatedCurrentlyMixedURIs = [];
@@ -85,7 +84,7 @@ function playASong($scope, $http) {
     for(var s of currentlyMixedURIs){
         formatedCurrentlyMixedURIs.push("spotify:track:".concat(s));
     }
-    //alert('play2'); 
+
     $http({
         method : "PUT",
         url : putPlaySongURL, 
@@ -96,7 +95,6 @@ function playASong($scope, $http) {
             "uris": formatedCurrentlyMixedURIs
         }
     }).then(function mySuccess(response) {
-                alert('play3'+ JSON.stringify(response)); 
                 console.log(JSON.stringify(response)
             );
         }, function myError(response) {
@@ -141,40 +139,12 @@ function shuffle(array) {
 }
 
 function getCurrentDeviceID($scope, $http) {
-    var getCurrentDeviceIdURL = 'https://api.spotify.com/v1/me/player/devices';
-    alert('test'); 
-    $http({
-        method : "GET",
-        url : getCurrentDeviceIdURL, 
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    }).then(function mySuccess(response) {
-        alert(JSON.stringify(angular.fromJson(response.data))); 
-        console.log(JSON.stringify(angular.fromJson(response.data)));
-        //$scope.selectedPlaylistParsedResponse = angular.fromJson(response.data);
-    }, function myError(response) {
-        alert(JSON.stringify(response)); 
-        $scope.myWelcome = response.statusText;
-    }); 
+    let response =  webCall_getDeviceInfo($scope, $http); 
+    alert('divice info - '+ response);
 }
 
-function pause($scope, $http) {
-    this.webServiceCalls($http, 'player/pause', 'GET'); 
+function getCurrentPlaybackState($scope, $http) {
+    var x = document.getElementById("pause");
+    x.style.display = "none";
 }
 
-function webServiceCalls($http, endpoint, method) {
-    let baseURl = 'https://api.spotify.com/v1/me/'; 
-    $http({
-        method : method,
-        url : baseURl + endpoint, 
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    }).then(function mySuccess(response) {
-        console.log(JSON.stringify(angular.fromJson(response.data)));
-    }, function myError(response) {
-        alert('error' + JSON.stringify(response)); 
-    }); 
-
-}

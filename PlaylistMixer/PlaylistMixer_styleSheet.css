@@ -1,0 +1,53 @@
+
+body {
+    background-color: black; 
+    height: 100%;
+}
+
+h1 {
+ color: white; 
+}
+
+ .playback-container {
+    text-align: center;
+    align-content: center;
+}
+
+ .main-container {
+    margin: 5%; 
+}
+
+ .play, .pause {
+    height: 70px;   
+    width: 70px;
+}
+.card {
+    width: 90%;
+    background-color: black;
+}
+/*next and prev*/ 
+  
+   .next-prev:hover {
+    background-color: #4CAF50;
+    color: black;
+  }
+  
+  .previous {
+    background-color: #f1f1f1;
+    color: black;
+    border-style: solid;
+    height: 50px;   
+    width: 50px;
+  }
+  
+  .next {
+    background-color: #f1f1f1;
+    color: black;
+    border-style: solid;
+    height: 50px;   
+    width: 50px;
+  }
+  
+  .round {
+    border-radius: 50%;
+  }

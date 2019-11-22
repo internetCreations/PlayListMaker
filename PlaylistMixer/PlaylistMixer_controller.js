@@ -15,7 +15,7 @@ app.controller('appController', function($scope, $http) {
 
   getCurrentUsersPlaylists($scope, $http); 
 
-  
+  getCurrentPlaybackState($scope, $http); 
 
   //when a saved playlist is selected, add to Selected Playlist List, and get tracks
   $scope.userSelectsPlaylist = function(userSelectedPlaylist){
@@ -25,29 +25,38 @@ app.controller('appController', function($scope, $http) {
     getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http); 
   }
 
-  // when ..........   play the playlist
-  $scope.playASong = function() {
-    //alert('test'); 
-    playASong($scope, $http); 
-  }
-
   $scope.playNextTrack = function() {
-    playNextTrack($scope, $http); 
-  }
+    webCall_playNext($scope, $http); 
+  } 
+
+  $scope.playPreviousTrack = function() {
+    webCall_playPrevious($scope, $http); 
+  } 
 
   $scope.shuffle = function() { 
     $scope.newMixedPlaylist = shuffle($scope.newMixedPlaylist); 
-  }
-
-  $scope.pause = function() { 
-    $scope.pause($scope, $http); 
   }
 
   $scope.getDeviceInfo = function() { 
     getCurrentDeviceID($scope, $http); 
   }
 
+  $scope.togglePlayPause = function() { 
+    var playElement = document.getElementById("play");
+    var pauseElement = document.getElementById("pause");
+
+    if(pauseElement.style.display =='none'){
+      playElement.style.display = "none";
+      pauseElement.style.display = 'initial';
+      playASong($scope, $http); 
+    } else if(playElement.style.display == "none") {
+      playElement.style.display = "initial";
+      pauseElement.style.display = 'none';
+      webCall_pause($scope, $http); 
+    }
+  }
 });
+
 
 
 
