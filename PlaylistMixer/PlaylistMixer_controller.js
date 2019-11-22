@@ -15,7 +15,7 @@ app.controller('appController', function($scope, $http) {
 
   getCurrentUsersPlaylists($scope, $http); 
 
-  getCurrentDeviceID($scope, $http); 
+  
 
   //when a saved playlist is selected, add to Selected Playlist List, and get tracks
   $scope.userSelectsPlaylist = function(userSelectedPlaylist){
@@ -27,6 +27,7 @@ app.controller('appController', function($scope, $http) {
 
   // when ..........   play the playlist
   $scope.playASong = function() {
+    //alert('test'); 
     playASong($scope, $http); 
   }
 
@@ -36,6 +37,14 @@ app.controller('appController', function($scope, $http) {
 
   $scope.shuffle = function() { 
     $scope.newMixedPlaylist = shuffle($scope.newMixedPlaylist); 
+  }
+
+  $scope.pause = function() { 
+    $scope.pause($scope, $http); 
+  }
+
+  $scope.getDeviceInfo = function() { 
+    getCurrentDeviceID($scope, $http); 
   }
 
 });

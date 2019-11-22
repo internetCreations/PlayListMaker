@@ -3,8 +3,10 @@ var player = {};
 function initWebPlayer() {
    
     player = new Spotify.Player({
-      name: 'Web Playback SDK Quick Start Player',
-      getOAuthToken: cb => { cb(token); }
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { 
+            cb(token);   
+        }
     });
    
     // Error handling
@@ -74,15 +76,16 @@ function getSelectedPlaylistTracks(userSelectedPlaylist, $scope, $http) {
 }
 
 function playASong($scope, $http) {
-    
-    var putPlaySongURL = 'https://api.spotify.com/v1/me/player/play';
+
+    //alert('play1'+ player); 
+    var putPlaySongURL = 'https://api.spotify.com/v1/me/player/play?device_id=2a6784273dc209214fbff72bf1787483583e38f8'; //efbca28c4003d99ad640a9c283c7c7f5b3d965ac';
     var currentlyMixedURIs = $scope.newMixedPlaylist.map(a => a.id); 
     var formatedCurrentlyMixedURIs = [];
 
     for(var s of currentlyMixedURIs){
         formatedCurrentlyMixedURIs.push("spotify:track:".concat(s));
     }
-
+    //alert('play2'); 
     $http({
         method : "PUT",
         url : putPlaySongURL, 
@@ -90,13 +93,16 @@ function playASong($scope, $http) {
             'Authorization': 'Bearer ' + token
         },
         data : {
-           "uris": formatedCurrentlyMixedURIs
+            "uris": formatedCurrentlyMixedURIs
         }
     }).then(function mySuccess(response) {
-        
-    }, function myError(response) {
-        $scope.myWelcome = response.statusText;
-    }); 
+                alert('play3'+ JSON.stringify(response)); 
+                console.log(JSON.stringify(response)
+            );
+        }, function myError(response) {
+            alert('play4'+ JSON.stringify(response)); 
+            $scope.myWelcome = response.statusText;
+        });   
 }
 
 function playNextTrack($scope, $http) {
@@ -136,7 +142,7 @@ function shuffle(array) {
 
 function getCurrentDeviceID($scope, $http) {
     var getCurrentDeviceIdURL = 'https://api.spotify.com/v1/me/player/devices';
-    //alert('test'); 
+    alert('test'); 
     $http({
         method : "GET",
         url : getCurrentDeviceIdURL, 
@@ -144,10 +150,31 @@ function getCurrentDeviceID($scope, $http) {
             'Authorization': 'Bearer ' + token
         }
     }).then(function mySuccess(response) {
-        alert(angular.fromJson(response.data)); 
+        alert(JSON.stringify(angular.fromJson(response.data))); 
+        console.log(JSON.stringify(angular.fromJson(response.data)));
         //$scope.selectedPlaylistParsedResponse = angular.fromJson(response.data);
     }, function myError(response) {
         alert(JSON.stringify(response)); 
         $scope.myWelcome = response.statusText;
     }); 
+}
+
+function pause($scope, $http) {
+    this.webServiceCalls($http, 'player/pause', 'GET'); 
+}
+
+function webServiceCalls($http, endpoint, method) {
+    let baseURl = 'https://api.spotify.com/v1/me/'; 
+    $http({
+        method : method,
+        url : baseURl + endpoint, 
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(function mySuccess(response) {
+        console.log(JSON.stringify(angular.fromJson(response.data)));
+    }, function myError(response) {
+        alert('error' + JSON.stringify(response)); 
+    }); 
+
 }
