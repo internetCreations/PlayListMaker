@@ -16,7 +16,7 @@ function webCall_getDeviceInfo($scope, $http) {
 }
 
 function webReturn_getDeviceInfo(response){
-    alert('response- '+ JSON.stringify(response)); 
+    //alert('response- '+ JSON.stringify(response)); 
 }
 
 function webServiceCalls($http, endpoint, method, returnMethod ) {
