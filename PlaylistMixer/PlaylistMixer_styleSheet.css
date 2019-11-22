@@ -17,10 +17,15 @@ h1 {
     margin: 5%; 
 }
 
- .play, .pause {
+ .pause {
+    display: none;
+}
+
+.play, .pause {
     height: 70px;   
     width: 70px;
 }
+
 .card {
     width: 90%;
     background-color: black;

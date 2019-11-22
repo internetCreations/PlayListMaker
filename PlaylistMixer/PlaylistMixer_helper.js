@@ -140,11 +140,11 @@ function shuffle(array) {
 
 function getCurrentDeviceID($scope, $http) {
     let response =  webCall_getDeviceInfo($scope, $http); 
-    alert('divice info - '+ response);
+    //alert('divice info - '+ response);
 }
 
 function getCurrentPlaybackState($scope, $http) {
-    var x = document.getElementById("pause");
-    x.style.display = "none";
+    /*var x = document.getElementById("pause");
+    x.style.display = "none";*/
 }
 
