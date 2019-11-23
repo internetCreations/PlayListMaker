@@ -44,12 +44,11 @@ app.controller('appController', function($scope, $http) {
   $scope.togglePlayPause = function() { 
     var playElement = document.getElementById("play");
     var pauseElement = document.getElementById("pause");
-
-    if(pauseElement.style.display =='none'){
+    if( !pauseElement.style.display || pauseElement.style.display == 'none'){
       playElement.style.display = "none";
       pauseElement.style.display = 'initial';
       playASong($scope, $http); 
-    } else if(playElement.style.display == "none") {
+    } else if(playElement.style.display == "none" || playElement.style.display == 'none' ) {
       playElement.style.display = "initial";
       pauseElement.style.display = 'none';
       webCall_pause($scope, $http); 

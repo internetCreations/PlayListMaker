@@ -33,26 +33,37 @@ h1 {
 /*next and prev*/ 
   
    .next-prev:hover {
-    background-color: #4CAF50;
+    border-color: #28a745;
     color: black;
   }
-  
-  .previous {
-    background-color: #f1f1f1;
-    color: black;
-    border-style: solid;
+
+  .next-prev {
     height: 50px;   
     width: 50px;
+    margin: 15px;
+  }
+
+  .previous {
+    color: black;
+    border-style: solid;
   }
   
   .next {
-    background-color: #f1f1f1;
     color: black;
     border-style: solid;
-    height: 50px;   
-    width: 50px;
+    font-weight: bold;
   }
   
   .round {
     border-radius: 50%;
+  }
+
+  .table-dark {
+      font-size: 1.5rem;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .remove-on-mobile {
+      display: none; 
+    }
   }
