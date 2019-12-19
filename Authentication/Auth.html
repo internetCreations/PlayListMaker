@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
+    
     <!--Bootstrap-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,15 +17,18 @@
     <head>
         <!--Bootstrap-->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     
-        <title>Authenticate to Spotify</title>
+        <title>Playlist Mixer</title>
     </head>
 
     <body>
         <div class="container-fluid auth-container">
             <div class="auth-actions">
-                    <h1 class="text-center" >Authenticate to Spotify</h1>
+                    <div class="title" >Playlist Mixer</div>
+                    <div class="details" >
+                        This app allows you to mix your playlists together. 
+                    </div>
                     <div ng-app="myApp" ng-controller="appController">
                         <button class="text-center" ng-click="connect()">Connect to Spotify</button>
                     </div>      
@@ -38,4 +42,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
     </body>
+
+    <footer class='footer-cont'> 
+        <div>See the source code on <a href="https://github.com/internetCreations/PlayListMaker">GitHub</a></div>
+        <div><a href="mailto:mes.smith57+playListMaker.com?Subject=Web%20Question"> Email </a> webmaster</div>
+    </footer>
 </html>

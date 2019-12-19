@@ -1,18 +1,23 @@
 html {
-    height: 100%;
-    width: 100%;
-    background-color: #393f4d;
+    background-color: #202221;
 }
 
 .auth-container {
-    background-color: #393f4d;
-    margin-top: 10%; 
+    background-color: #202221;
+    margin-top: 20%; 
+    text-align: center;
 }
 
-.auth-actions {
-    margin: auto;
-    width: 50%;
-    text-align: center;
+.title {
+    color: white; 
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.details {
+    color: white; 
+    font-size: 1rem;
+    margin-bottom: 10%;
 }
 
 button {
@@ -21,18 +26,32 @@ button {
     border: none;
     border-radius: 16px;
     
-    padding-top: .7em; 
-    padding-bottom: .7em; 
-    padding-left: 3em; 
-    padding-right: 3em; 
-    
+    padding-top: 1.5%; 
+    padding-bottom: 1.5%; 
+    padding-left: 3%; 
+    padding-right: 3%; 
+
     font-weight: bold;
     font-size: 1.5em;
-    
 }
 
-h1 {
-    color: #d4d4dc; 
+.footer-cont {
+    color: white; 
+    background-color: #202221;
+    vertical-align: baseline;
+    text-align: center;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 2%;   
 }
+
+@media only screen and (min-width: 768px) {
+    .auth-container {
+        margin-top: 5%; 
+    }
+
+  }
 
 
