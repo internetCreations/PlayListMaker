@@ -8,14 +8,19 @@ var app = angular.module('myApp', []);
 app.controller('appController', function($scope, $http) { 
   $scope.usersCurrentPlayLists = [];  
   $scope.selectedPlayLists = [];
-  $scope.newMixedPlaylist = [];
+  $scope.newMixedPlaylist = []; 
+  $scope.deviceList = [];
+  $scope.currentlyPlaying = []; 
+
 
   //get current users token
   token = window.location.hash.split('=')[1]; 
 
   getCurrentUsersPlaylists($scope, $http); 
 
-  getCurrentPlaybackState($scope, $http); 
+  getCurrentUsersPlayback($scope, $http);
+  //webCall_getCurrentPlaybackState($scope, $http); 
+  webCall_getDeviceInfo($scope, $http); 
 
   //when a saved playlist is selected, add to Selected Playlist List, and get tracks
   $scope.userSelectsPlaylist = function(userSelectedPlaylist){
@@ -38,7 +43,7 @@ app.controller('appController', function($scope, $http) {
   }
 
   $scope.getDeviceInfo = function() { 
-    getCurrentDeviceID($scope, $http); 
+    webCall_getDeviceInfo($scope, $http); 
   }
 
   $scope.togglePlayPause = function() { 

@@ -15,8 +15,11 @@
   <script src="./PlaylistMixer_ViewModel.js"></script>
   <script src="./PlaylistMixer_helper.js"></script>
   <script src="./PlaylistMixer_controller.js"></script>
-  <style src="./PlaylistMixer_styleSheet.css"></style>
   <script src="../WebServices.js"></script>
+  <script src="./DataServices/GetUsersPlayback.js"></script>
+  
+  <style src="./PlaylistMixer_styleSheet.css"></style>
+  <style src="./PlaylistMixer_styleSheet.css"></style> 
 
   <head>
 
@@ -29,22 +32,36 @@
     <title>Spotify Playlist Mixer</title>
   </head>
   <body>
-   
-    <div ng-app="myApp" ng-controller="appController" class='main-container'>
+    <div ng-app="myApp" ng-controller="appController" class="main-container">
     <!-- main page body-->
       <div class="row">
-        <div>
+        <div class="header-cont">
           <h1>Currently Playing</h1>
+          <div class="current-track-cont">
+            <p>
+              <img class="current-track-img" src="{{ currentlyPlayingTrack.url }}" />
+              {{ currentlyPlayingTrack.name }} - {{ currentlyPlayingTrack.artist }}
+            </p>
+          </div>
         </div>
         <div class="playback-container">
-          
           <img src="ShuffleIcon.png" ng-click="shuffle()" class='shuffle next-prev'>
           <img src="PrevIcon.png" ng-click="playPreviousTrack()" id='prev' class='previous round next-prev'>
           <img src="PauseIcon.png" ng-click="togglePlayPause()" id='pause' class='pause'>
           <img src="PlayIcon.png" ng-click="togglePlayPause()" id='play' class='play'>
-          <img src="NextIcon.png" ng-click="playNextTrack()" id='next' class='next round next-prev'>
-          
-          <!--<button ng-click="getDeviceInfo()">getDeviceInfo</button>  --> 
+          <img src="NextIcon.png" ng-click="playNextTrack()" id='next' class='next round next-prev'> 
+          <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle dropdownMenuButton" type="button" 
+                      id="dropdownMenuButton" data-toggle="dropdown" 
+                      aria-haspopup="true" aria-expanded="false">
+                Devices
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div ng-repeat="device in deviceList">
+                  <a class="dropdown-item">{{ device.name }}</a> 
+                </div>
+              </div>
+          </div>
         </div>
       </div>
       <div class="row">

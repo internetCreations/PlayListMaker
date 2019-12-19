@@ -98,7 +98,7 @@ function playASong($scope, $http) {
                 console.log(JSON.stringify(response)
             );
         }, function myError(response) {
-            alert('play4'+ JSON.stringify(response)); 
+            //alert('play4'+ JSON.stringify(response)); 
             $scope.myWelcome = response.statusText;
         });   
 }
@@ -144,7 +144,6 @@ function getCurrentDeviceID($scope, $http) {
 }
 
 function getCurrentPlaybackState($scope, $http) {
-    /*var x = document.getElementById("pause");
-    x.style.display = "none";*/
+    //webCall_getCurrentPlaybackState($scope, $http); 
 }
 

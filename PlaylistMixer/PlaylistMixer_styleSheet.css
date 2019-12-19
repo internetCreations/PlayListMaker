@@ -5,13 +5,25 @@ body {
 }
 
 h1 {
- color: white; 
+  color: white; 
 }
 
- .playback-container {
-    text-align: center;
-    align-content: center;
-}
+  .current-track-cont {
+    color: white; 
+ }
+  .current-track-img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+ .header-cont, .playback-container, .dropdownMenuButton{
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+  .dropdown{
+  text-align: center;
+ }
 
  .main-container {
     margin: 5%; 
