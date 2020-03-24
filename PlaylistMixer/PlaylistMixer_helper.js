@@ -145,7 +145,6 @@ function getCurrentDeviceID($scope, $http) {
 }
 
 function getCurrentPlaybackState($scope, $http) {
-<<<<<<< HEAD
     var currentPlaybackURL = 'https://api.spotify.com/v1/me/player';
     $http({
         method : "GET",
@@ -160,8 +159,5 @@ function getCurrentPlaybackState($scope, $http) {
         alert(JSON.stringify(response)); 
         $scope.myWelcome = response.statusText;
     }); 
-=======
-    //webCall_getCurrentPlaybackState($scope, $http); 
->>>>>>> c256c85a9f010f8533d343ab06f435e8e1ed17bc
 }
 
