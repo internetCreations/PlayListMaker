@@ -3,6 +3,7 @@ function webCall_pause($scope, $http) {
 }
 
 function webCall_playPrevious($scope, $http) {
+    //alert('prev');
     webServiceCalls($http, 'player/previous', 'Post'); 
 }
 

@@ -47,8 +47,9 @@ function getCurrentUsersPlaylists($scope, $http) {
         for(var x of $scope.parsedResponse.items){
             let newPlaylist = new Playlist(x.id, x.name, x.owner.display_name, x.tracks.total); 
             $scope.usersCurrentPlayLists.push(newPlaylist); 
-            console.log('Current Users Playlists -->' + $scope.usersCurrentPlayLists); 
         }  
+        console.log('Current Users Playlists -->' + 
+        JSON.stringify( $scope.usersCurrentPlayLists )); 
     }, function myError(response) {
         $scope.myWelcome = response.statusText;
     });
@@ -144,7 +145,19 @@ function getCurrentDeviceID($scope, $http) {
 }
 
 function getCurrentPlaybackState($scope, $http) {
-    /*var x = document.getElementById("pause");
-    x.style.display = "none";*/
+    var currentPlaybackURL = 'https://api.spotify.com/v1/me/player';
+    $http({
+        method : "GET",
+        url : currentPlaybackURL, 
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(function mySuccess(response) {
+        $scope.currentPlaybackDetails = response;
+        console.log( $scope.currentPlaybackDetails); 
+    }, function myError(response) {
+        alert(JSON.stringify(response)); 
+        $scope.myWelcome = response.statusText;
+    }); 
 }
 

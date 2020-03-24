@@ -15,8 +15,10 @@
   <script src="./PlaylistMixer_ViewModel.js"></script>
   <script src="./PlaylistMixer_helper.js"></script>
   <script src="./PlaylistMixer_controller.js"></script>
-  <style src="./PlaylistMixer_styleSheet.css"></style>
   <script src="../WebServices.js"></script>
+  <style src="./PlaylistMixer_styleSheet.css"></style>  
+  
+  <script src="./SampleData.js"></script>
 
   <head>
 
@@ -32,27 +34,40 @@
    
     <div ng-app="myApp" ng-controller="appController" class='main-container'>
     <!-- main page body-->
-      <div class="row">
-        <div>
-          <h1>Currently Playing</h1>
+      <div class="row" >
+        <h1 class="header">Currently Playing</h1>
+      </div>
+      <div class="row" >
+        <div class="playback-img">
+          <img src="{{currentPlaybackDetails.data.item.album.images[2].url}}" />
         </div>
-        <div class="playback-container">
-          
-          <img src="ShuffleIcon.png" ng-click="shuffle()" class='shuffle next-prev'>
-          <img src="PrevIcon.png" ng-click="playPreviousTrack()" id='prev' class='previous round next-prev'>
-          <img src="PauseIcon.png" ng-click="togglePlayPause()" id='pause' class='pause'>
-          <img src="PlayIcon.png" ng-click="togglePlayPause()" id='play' class='play'>
-          <img src="NextIcon.png" ng-click="playNextTrack()" id='next' class='next round next-prev'>
-          
-          <!--<button ng-click="getDeviceInfo()">getDeviceInfo</button>  --> 
+        <div class="playback-text">
+          {{currentPlaybackDetails.data.item.name}} <br/>
+          {{currentPlaybackDetails.data.item.artists[0].name}} <br/>
+          Playing on: {{currentPlaybackDetails.data.device.name}}
         </div>
+
+        
+        
+      </div>
+      <div class="row playback-container">
+        <button class='prev-button' ng-click="playPreviousTrack()" ></button>
+        <button class='button'></button>
+        <button class='next-button'></button>
+        <!--<img src="ShuffleIcon.png" ng-click="shuffle()" class='shuffle next-prev'>
+        <img src="PrevIcon.png" ng-click="playPreviousTrack()" id='prev' class='previous round next-prev'>
+        <img src="PauseIcon.png" ng-click="togglePlayPause()" id='pause' class='pause'>
+        <img src="PlayIcon.png" ng-click="togglePlayPause()" id='play' class='play'>
+        <img src="NextIcon.png" ng-click="playNextTrack()" id='next' class='next round next-prev'>
+          -->  
+        <!--<button ng-click="getDeviceInfo()">getDeviceInfo</button>  --> 
       </div>
       <div class="row">
         <div class="col-md-4">
           <div class="accordion card">
           <div class="card-header">
-            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#column1">
-              <h1>Your Saved Playlists</h1>
+            <button class="btn btn-primary collapsed" type="button" data-toggle="collapse" data-target="#column1">
+              <h3 class="section-header">Your Saved Playlists</h3>
             </button>
           </div>
           <div class="collapse" id="column1">
@@ -61,16 +76,22 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col">Playlist Name</th>
-                <th scope="col" class='remove-on-mobile'>Owner</th>
+                <th scope="col" class='remove-on-mobile '>Owner</th>
                 <th scope="col" class='remove-on-mobile'># of Tracks</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="playlist in usersCurrentPlayLists">
                 <td>
+                  <div class="check"></div>
                   <input type="checkbox" ng-click="userSelectsPlaylist( playlist )"></input>
                 </td>
-                <td>{{ playlist.name }}</td>
+                <td>{{ playlist.name }}
+                    <div>
+                      <span class="owner-name text-truncate">by {{ playlist.ownerName }}</span>
+                      <span class="length">{{ playlist.length }}</span>
+                    </div>
+                </td>
                 <td class='remove-on-mobile'>{{ playlist.ownerName }}</td>
                 <td class='remove-on-mobile'>{{ playlist.length }}</td>
               </tr>
@@ -83,8 +104,8 @@
         <div class="col-md-4">
           <div class="accordion card">
           <div class="card-header">
-            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#column2">
-              <h1>Playlists to Mix</h1>
+            <button class="btn btn-primary collapsed" type="button" data-toggle="collapse" data-target="#column2">
+              <h3 class="section-header">Playlists to Mix</h3>
             </button>
           <div class="card-body collapse" id="column2">
           <table class="table table-hover table-dark">
@@ -106,8 +127,8 @@
         <div class="col-md-4">
           <div class="accordion card">
           <div class="card-header">
-            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#column3">
-                <h1>New Mixed Playlist</h1>
+            <button class="btn btn-primary collapsed" type="button" data-toggle="collapse" data-target="#column3">
+                <h3 class="section-header">New Mixed Playlist</h3>
             </button>
           </div>
           <div class="card-body collapse" id="column3">
