@@ -4,6 +4,7 @@ body {
     height: 100%;
 }
 
+<<<<<<< HEAD
 .header {
   margin: auto;
   color: white; 
@@ -14,6 +15,28 @@ body {
   float: left;
   width: 40%;
 }
+=======
+h1 {
+  color: white; 
+}
+
+  .current-track-cont {
+    color: white; 
+ }
+  .current-track-img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+ .header-cont, .playback-container, .dropdownMenuButton{
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+  .dropdown{
+  text-align: center;
+ }
+>>>>>>> c256c85a9f010f8533d343ab06f435e8e1ed17bc
 
 .length {
   font-size: .65em;

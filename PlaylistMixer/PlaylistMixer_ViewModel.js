@@ -8,8 +8,18 @@ class Playlist {
 }
   
 class Track {
-  constructor(id, name) {
+  constructor(id, name, artist, url) {
     this.id = id;
     this.name = name;
+    this.artist = artist; 
+    this.url = url;
+  }
+}
+
+class Device {
+  constructor(id, name, isActive) {
+    this.id = id;
+    this.name = name;
+    this.isActive = isActive;
   }
 }

@@ -11,16 +11,27 @@ function webCall_playNext($scope, $http) {
     webServiceCalls($http, 'player/next', 'Post'); 
 }
 
-
 function webCall_getDeviceInfo($scope, $http) {
-    webServiceCalls($http, 'player/devices', 'GET', webReturn_getDeviceInfo ); 
+    webServiceCalls($http, 'player/devices', 'GET', webReturn_getDeviceInfo, $scope ); 
 }
 
-function webReturn_getDeviceInfo(response){
-    //alert('response- '+ JSON.stringify(response)); 
+function webCall_getCurrentPlaybackState($scope, $http) {
+    webServiceCalls($http, $scope, 'player', 'GET', webReturn_getCurrentPlaybackState, $scope); 
 }
 
-function webServiceCalls($http, endpoint, method, returnMethod ) {
+function webReturn_getCurrentPlaybackState(response, $scope){
+    //alert('response playback- '+ JSON.stringify(response)); 
+    console.log('response- '+ JSON.stringify(response)); 
+}
+
+function webReturn_getDeviceInfo(response, $scope){
+    for(let y of response.data.devices){
+        let newDevice = new Device(y.id, y.name, y.is_active); 
+        $scope.deviceList.push(newDevice);
+    }  
+}
+
+function webServiceCalls($http, endpoint, method, returnMethod, $scope ) {
     let baseURl = 'https://api.spotify.com/v1/me/'; 
     $http({
         method : method,
@@ -30,10 +41,11 @@ function webServiceCalls($http, endpoint, method, returnMethod ) {
         }
     }).then(function mySuccess(response) {
         if (returnMethod){
-            returnMethod.call(this, response);
+            //alert('response2- '+ JSON.stringify(response)); 
+            returnMethod.call(this, response, $scope);
         }  
     }, function myError(error) {
-        alert('error' + JSON.stringify(error)); 
+        //alert('error' + JSON.stringify(error)); 
         console.log('error' + JSON.stringify(error));
     });
 
