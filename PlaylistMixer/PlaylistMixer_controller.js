@@ -10,11 +10,11 @@ app.controller('appController', function($scope, $http) {
   $scope.selectedPlayLists = [];
   $scope.newMixedPlaylist = []; 
   $scope.deviceList = [];
-  $scope.currentlyPlaying = []; 
+  $scope.currentPlaybackDetails = []; 
 
 
   token = window.location.hash.split('=')[1];
-  alert( window.location.hash.split('=') );
+  //alert( window.location.hash.split('=') );
   if (token == 'Sample') {
     //alert('sample data'); 
     $scope.usersCurrentPlayLists = SamplePlaylist; 
@@ -25,8 +25,8 @@ app.controller('appController', function($scope, $http) {
 
   getCurrentUsersPlaylists($scope, $http); 
 
-  getCurrentUsersPlayback($scope, $http);
-  //webCall_getCurrentPlaybackState($scope, $http); 
+  //getCurrentUsersPlayback($scope, $http);
+  getCurrentPlaybackState($scope, $http); 
   webCall_getDeviceInfo($scope, $http); 
 
   //when a saved playlist is selected, add to Selected Playlist List, 
